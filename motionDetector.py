@@ -10,6 +10,14 @@ import cv2
 import numpy as np
 import datetime
 
+# You will need to un-note the following commands, 
+# They disable the monitor's screen saver so
+# it won't interfere with the script. This is 
+# necessary as PiCamera cannot function while the monitor
+# is sleeping due to code limitations, which is why
+# this scrpt disables the mointor rather than just 
+# putting it in sleep mode.
+
 #os.system('xset -d :0 s reset && xset -d :0 dpms force on')
 #os.system('xset -d :0 s off')
 #os.system('xset -d :0 s noblank')
