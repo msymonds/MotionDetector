@@ -1,9 +1,6 @@
-
+# MotionDetector
 # Author: Michael Symonds
-# Date: March 20, 2017
-
-# SimpleMotionDetector is used in conjuction with a raspberry pi using the pyCamera
-# and requires PiCamera and OpenCV (which must be installed) as a dependency
+# Updated: 8/2/17
 
 from picamera import PiCamera
 import time
@@ -13,6 +10,10 @@ import cv2
 import numpy as np
 import datetime
 
+#os.system('xset -d :0 s reset && xset -d :0 dpms force on')
+#os.system('xset -d :0 s off')
+#os.system('xset -d :0 s noblank')
+#os.system('xset -d :0 -dpms')
 
 def getTime():
     ts = time.time()
@@ -25,7 +26,7 @@ def preSleepCheck():
     camera.brightness=70
     sleep(1)
     camera.capture('primary.jpg')
-    os.system('cp -f /home/pi//MagicMirror/primary.jpg /home/pi/MagicMirror/previous.jpg')
+    os.system('cp -f ./primary.jpg ./previous.jpg')
     sleep(1)
     camera.capture('primary.jpg')
     
@@ -47,7 +48,7 @@ def sleepCycle():
     camera.brightness=70
     noMovement = True
     while(noMovement):
-        os.system('cp -f /home/pi//MagicMirror/primary.jpg /home/pi/MagicMirror/previous.jpg')
+        os.system('cp -f ./primary.jpg ./previous.jpg')
         sleep(1)
         camera.capture('primary.jpg')
         previous = cv2.imread("previous.jpg")
@@ -63,7 +64,7 @@ def sleepCycle():
     
 if __name__ == '__main__':
     while(True):
-        sleep(120)
+        sleep(10)
         if not preSleepCheck():
             os.system("vcgencmd display_power 0")
             sleepCycle()
